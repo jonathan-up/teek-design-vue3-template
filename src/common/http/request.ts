@@ -9,7 +9,6 @@ import type {
 import axios from "axios";
 import { RequestMethodEnum, ResultEnum } from "./http-enum";
 import { showFullScreenLoading, tryHideFullScreenLoading } from "./service-loading";
-import { checkStatus } from "./check-status";
 import { AxiosCanceler, CacheManager, getParamsProcessor, processContentType, RetryHandler } from "./helper";
 
 const defaultOptions: RequestConfigOptions = {
@@ -135,7 +134,7 @@ export class Request {
 
     // 响应拦截器
     this.service.interceptors.response.use(
-      (response: AxiosResponse & { config: RequestConfig }) => {
+      (response: AxiosResponse<httpNs.Response> & { config: RequestConfig }) => {
         const { data, config, status } = response;
 
         // 缓存 GET 请求响应数据
@@ -154,7 +153,7 @@ export class Request {
         if (config.responseReturn === "body") return data;
 
         // 登陆失效
-        if (data.code === ResultEnum.LOGIN) {
+        if (status === ResultEnum.LOGIN) {
           // 处理刷新 token 的逻辑
           if (this.handlers.refreshToken) return this.handleRefreshToken(response);
 
@@ -168,7 +167,7 @@ export class Request {
         }
 
         // 错误信息
-        if (data.code !== ResultEnum.SUCCESS) {
+        if (status !== ResultEnum.SUCCESS) {
           this.handlers.showMessage?.(data.message, "error");
 
           return Promise.reject(data);
@@ -176,7 +175,7 @@ export class Request {
 
         return data;
       },
-      async (error: AxiosError) => {
+      async (error: AxiosError<httpNs.Response>) => {
         const { config } = error;
         const requestConfig = config as RequestConfig;
 
@@ -209,7 +208,9 @@ export class Request {
         }
 
         // 根据响应的错误状态码，做不同的处理
-        if (error.response) this.handlers.showMessage?.(checkStatus(error.response.status), "error");
+        if (error.response) {
+          this.handlers.showMessage?.(error.response.data.message, "error");
+        }
 
         return Promise.reject(error);
       }

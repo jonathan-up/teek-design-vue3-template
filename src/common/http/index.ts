@@ -2,7 +2,6 @@
 export * from "./http-enum";
 
 // 导出工具类
-export * from "./check-status";
 export * from "./service-loading";
 export * from "./helper";
 
