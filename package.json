@@ -16,8 +16,6 @@
     "build:preview": "pnpm build && vite preview",
     "cloc": "NODE_OPTIONS=--max-old-space-size=4096 cloc . --exclude-dir=node_modules",
     "clean:cache": "rm -rf node_modules && rm -rf .eslintcache && pnpm install",
-    "prepare": "husky install",
-    "lint:lint-staged": "lint-staged -c ./.husky/lintstagedrc.js",
     "lint:stylelint": "stylelint \"**/*.{vue,css,scss,postcss,less}\" --fix",
     "lint:prettier": "prettier --write  \"src/**/*.{js,ts,json,tsx,css,less,scss,vue,html,md}\"",
     "lint:eslint": "eslint --max-warnings 0  \"{src,mock,build}/**/*.{vue,js,ts,tsx}\" --fix",
@@ -53,8 +51,6 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
     "@eslint/js": "^9.33.0",
     "@iconify/vue": "^5.0.0",
     "@types/node": "^24.3.0",
@@ -67,7 +63,6 @@
     "@vitejs/plugin-vue-jsx": "^5.0.1",
     "autoprefixer": "^10.4.21",
     "cloc": "^2.11.0",
-    "commitizen": "^4.3.1",
     "cssnano": "^7.1.0",
     "cz-git": "^1.12.0",
     "dotenv": "^17.2.1",
@@ -77,8 +72,6 @@
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-vue": "^10.4.0",
     "globals": "^16.3.0",
-    "husky": "^9.1.7",
-    "lint-staged": "^16.1.5",
     "postcss": "^8.5.6",
     "postcss-html": "^1.8.0",
     "postcss-import": "^16.1.1",
@@ -108,10 +101,5 @@
     "vite-plugin-vue-devtools": "^8.0.0",
     "vue-eslint-parser": "^10.2.0",
     "vue-tsc": "^3.0.5"
-  },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-git"
-    }
   }
 }
