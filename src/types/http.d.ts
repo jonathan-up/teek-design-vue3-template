@@ -1,13 +1,13 @@
 declare namespace httpNs {
   interface Response<T = any> {
-    /**
-     * 状态码
-     */
-    code: number;
-    /**
-     * 状态码信息
-     */
-    status: string;
+    // /**
+    //  * 状态码
+    //  */
+    // code: number;
+    // /**
+    //  * 状态码信息
+    //  */
+    // status: string;
     /**
      * 消息
      */
@@ -15,6 +15,6 @@ declare namespace httpNs {
     /**
      * 数据
      */
-    data: T;
+    result: T;
   }
 }
