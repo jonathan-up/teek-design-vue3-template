@@ -18,7 +18,7 @@ import {
 
 export const defaultServiceConfig: ServiceConfig = {
   layout: {
-    name: "Teek Design Vue3",
+    name: "芙蓉Saas",
     avatar: "/avatar.png",
     titleMode: TitleModeEnum.ProjectPage,
     layoutMode: LayoutModeEnum.Vertical,
