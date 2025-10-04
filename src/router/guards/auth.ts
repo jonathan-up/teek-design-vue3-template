@@ -40,8 +40,8 @@ export const createAuthGuard = (router: Router) => {
     // 判断是否加载过路由，如果没有则加载路由
     if (!routeStore.loadedRouteList.length) {
       try {
-        const userInfo = await userStore.getUserInfo();
-        await initDynamicRoutes(userInfo.roles);
+        userStore.getUserInfo();
+        await initDynamicRoutes(userStore.roles);
         return next({ ...to, replace: true });
       } catch (error) {
         userStore.clearPermission();

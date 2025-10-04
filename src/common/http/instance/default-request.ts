@@ -19,7 +19,7 @@ export const http = createRequest({
     onRequest: (config: RequestConfig) => {
       // 添加认证 token
       const userStore = useUserStore();
-      if (userStore.accessToken) config.headers.token = userStore.accessToken;
+      if (userStore.accessToken) config.headers.Authorization = userStore.accessToken;
       return config;
     },
   },
@@ -48,15 +48,16 @@ export const http = createRequest({
     },
     // 刷新 token 函数
     refreshToken: async () => {
-      try {
-        const userStore = useUserStore();
-        // 调用刷新 token 的 API
-        const res = await userStore.doRefreshToken();
-        return !!res;
-      } catch (error) {
-        console.error("Token refresh failed:", error);
-        return false;
-      }
+      // try {
+      //   const userStore = useUserStore();
+      //   // 调用刷新 token 的 API
+      //   const res = await userStore.doRefreshToken();
+      //   return !!res;
+      // } catch (error) {
+      //   console.error("Token refresh failed:", error);
+      //   return false;
+      // }
+      return false;
     },
   },
 });

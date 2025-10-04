@@ -1,4 +1,3 @@
-import type { UserInfo } from "@/pinia";
 import { http } from "@/common/http";
 
 export interface LoginParams {
@@ -7,19 +6,27 @@ export interface LoginParams {
   verifyCode?: string;
 }
 
-export interface Token {
-  accessToken: string;
-  refreshToken: string;
+export interface User {
+  id?: Number;
+  username?: string;
+  name?: string;
+  phone?: string;
+  avatar?: string;
+}
+
+export interface LoginResponse {
+  data: User;
+  token: string;
 }
 
 export const UserService = {
   // 登录
   login(params: LoginParams) {
-    return http.post<httpNs.Response<Token>>("/auth/login", params);
+    return http.post<httpNs.Response<LoginResponse>>("/op/api/auth/login", params);
   },
 
   // 获取用户信息
   getUserInfo() {
-    return http.get<httpNs.Response<UserInfo>>("/auth/getUserInfo");
+    return http.get<httpNs.Response<User>>("/op/api/auth/getUserInfo");
   },
 };
