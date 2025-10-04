@@ -202,7 +202,11 @@ onUnmounted(() => {
     <div v-if="!isLock">
       <el-dialog v-model="dialogVisible" :width="370" :show-close="false" align-center @open="handleDialogOpen">
         <div :class="ns.e('lock-content')">
-          <img class="cover" :src="userInfo.avatar" alt="用户头像" />
+          <el-image :src="userInfo.avatar" class="cover">
+            <template #error>
+              <el-image :src="serviceConfig.layout.avatar" />
+            </template>
+          </el-image>
           <div class="username">{{ userInfo.username }}</div>
 
           <el-form ref="formInstance" :model="formData" :rules="rules" @submit.prevent="handleLock">
